@@ -221,11 +221,18 @@
         $(document).ready(function(){
           $(".add-filter").click(function(e){
             var label = $(this).attr("id");
-            $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="search.."></div>`);
-          $("#submit").show();
+            if (label == 'price')
+                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="from"></div><div class="col-md-4"><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="to"></div>`);
+            else if (label == 'centris_title')
+                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);
+            else
+                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="search.."></div>`);
+
+            $("#submit").show();
           });
         });
         function columnFilterKeyUp(label) {
+            if (label == 'centris_title')
             var value = $('#col'+label+'_filter').val();
             console.log(label, value)
             filterColumn(label, value);
