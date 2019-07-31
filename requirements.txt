@@ -1,0 +1,4 @@
+django
+libmysqlclient-dev
+mysqlclient
+django-crispy-forms

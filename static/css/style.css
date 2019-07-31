@@ -1,0 +1,24 @@
+table, td, th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+
+.search-field {
+    float: left !important;
+    padding: 15px 0 0 0 !important;
+}
+
+.filter-input {
+    float: right !important;
+}

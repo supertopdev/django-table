@@ -1,0 +1,257 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.modal.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .search-field {
+            float: left !important;
+            padding: 5px 0 0 0 !important;
+        }
+
+        .filter-input {
+            float: right !important;
+        }
+
+        #search_fiels .col-md-4 {
+            margin-top: 15px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="header">
+        <h1>Centris Properties</h1>
+    </div>
+    <div id="ex1" class="modal">
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="pid">Search Number</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="centris_title">Search Title</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="price">Search Price</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="workscore">Search Workscore</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="beds_baths">Search Rooms</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="address">Search Address</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="agent_name">Search Agent Name</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="built_year">Search Built Year</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="const_year">Search Construction Year</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="available_area">Search Available Area</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="lot_area">Search Lot Area</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="fireplace">Search Fireplace/Stove</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="add_features">Search Additional Features</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="gross_revenue">Search Gross Revenue</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="unit_number">Search Unit Number</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="parking">Search Parking</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="main_unit">Search Main Unit</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="resid_unit">Search Residential Unit</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="building_area">Search Building Area</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="use_property">Search Use of Property</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="zoning">Search Zoning</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="resid_units">Search Residential Units</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="business_type">Search Business Type</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="intergen">Search Intergenerational</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="building_style">SearchBuilding Style</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="pool">Search Pool</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="active">Search Active</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="condominium">Search Condominium</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="gross_area">Search Gross Area</a>
+        </p>
+        <p>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="net_area">Search Net Area</a>
+            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="operation_type">Search Operation Type</a>
+        </p>
+    </div>
+    <div id="demo" class="display">
+        <a href="#ex1" rel="modal:open" class="btn btn-success">Add Search</a>
+
+        <form name="search" action="search" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div id="search_fiels" class="row">
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-success col-md-1 offset-md-5" placeholder="search" id="submit" style="display: none; margin-top: 30px;">
+        </form>
+
+
+        <table id="example" class="display" style="width:100%">
+            <thead class="bg-success">
+            <tr class="info">
+                <th class="number" scope="col">Number</th>
+                <th scope="col">Title</th>
+                <th scope="col">Address</th>
+                <th scope="col">Price</th>
+                <th scope="col">Workscore</th>
+                <th scope="col">Agent Name</th>
+                <th scope="col">Rooms</th>
+                <th scope="col">Geo Cordinates</th>
+                <th scope="col">Description</th>
+                <th scope="col">Built Year</th>
+                <th scope="col">Construction Year</th>
+                <th scope="col">Available Area</th>
+                <th scope="col">Lot Area</th>
+                <th scope="col">Operation Type</th>
+                <th scope="col">Fireplace/Stove</th>
+                <th scope="col">Additional Features</th>
+                <th scope="col">Gross Revenue</th>
+                <th scope="col">Main Unit</th>
+                <th scope="col">Residential Units</th>
+                <th scope="col">Number of Unit</th>
+                <th scope="col">Parking</th>
+                <th scope="col">Building Area</th>
+                <th scope="col">Use of Property</th>
+                <th scope="col">Zoning</th>
+                <th scope="col">Residential Unit</th>
+                <th scope="col">Business Type</th>
+                <th scope="col">Intergenerational</th>
+                <th scope="col">Building Style</th>
+                <th scope="col">Pool</th>
+                <th scope="col">Condominium</th>
+                <th scope="col">Gross Area</th>
+                <th scope="col">Net Area</th>
+                <th scope="col">Active</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for item in centris %}
+                <tr>
+                    <td class="pid">{{ item.pid }}</td>
+                    <td class="centris_title">{{ item.centris_title }}</td>
+                    <td class="address">{{ item.address }}</td>
+                    <td class="price">{{ item.price }}</td>
+                    <td class="workscore">{{ item.workscore }}</td>
+                    <td class="agent_name">{{ item.agent_name }}</td>
+                    <td class="beds_baths">{{ item.beds_baths }}</td>
+                    <td class="geo_cordinates">{{ item.geo_cordinates }}</td>
+                    <td class="description">{{ item.description }}</td>
+                    <td class="built_year">{{ item.built_year }}</td>
+                    <td class="construction_year">{{ item.construction_year }}</td>
+                    <td class="available_area">{{ item.available_area }}</td>
+                    <td class="lot_area">{{ item.lot_area }}</td>
+                    <td class="operation_type">{{ item.operation_type }}</td>
+                    <td class="fireplace_stove">{{ item.fireplace_stove }}</td>
+                    <td class="additional_features">{{ item.additional_features }}</td>
+                    <td class="potential_gross_revenue">{{ item.potential_gross_revenue }}</td>
+                    <td class="main_unit">{{ item.main_unit }}</td>
+                    <td class="residential_units">{{ item.residential_units }}</td>
+                    <td class="unit_number">{{ item.unit_number }}</td>
+                    <td class="parking">{{ item.parking }}</td>
+                    <td class="building_area">{{ item.building_area }}</td>
+                    <td class="use_property">{{ item.use_property }}</td>
+                    <td class="zoning">{{ item.zoning }}</td>
+                    <td class="residential_unit">{{ item.residential_unit }}</td>
+                    <td class="business_type">{{ item.business_type }}</td>
+                    <td class="intergenerational">{{ item.intergenerational }}</td>
+                    <td class="building_style">{{ item.building_style }}</td>
+                    <td class="pool">{{ item.pool }}</td>
+                    <td class="condominium">{{ item.condominium }}</td>
+                    <td class="gross_area">{{ item.gross_area }}</td>
+                    <td class="net_area">{{ item.net_area }}</td>
+                    <td class="active">{{ item.property_current_active }}</td>
+                    <td>
+                        <a href='#' class="delete btn btn-danger" id="{{ item.id }}"> Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="pagination">
+
+        {% if centris.has_previous %}
+            <a href="?page=1" class="btn btn-outline-warning">First</a>
+            <a href="?page={{ centris.previous_page_number }}" class="btn btn-outline-warning">Previous</a>
+        {% endif %}
+
+        <span class="btn btn-light">{{ centris.number }}</span>
+        <span class="btn btn-light">of</span>
+        <span class="btn btn-light">{{ centris.paginator.num_pages }}</span>
+
+        {% if centris.has_next %}
+            <a href="?page={{ centris.next_page_number }}" class="btn btn-outline-warning">Next</a>
+            <a href="?page={{ centris.paginator.num_pages }}" class="btn btn-outline-warning">Last</a>
+        {% endif %}
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'js/jquery.modal.min.js' %}"></script>
+
+    <script>
+
+        $(document).ready(function(){
+          $(".add-filter").click(function(e){
+            var label = $(this).attr("id");
+            $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="search.."></div>`);
+          $("#submit").show();
+          });
+        });
+        function columnFilterKeyUp(label) {
+            var value = $('#col'+label+'_filter').val();
+            console.log(label, value)
+            filterColumn(label, value);
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $(".delete").click(function() {
+                var id = $(this).attr('id');
+                $.ajax({
+                    url: "{% url 'delete' %}",
+                    data: { 'id' : id },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function(response){
+                        if (response['success'] == 'success') {
+                            location.reload(true);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
