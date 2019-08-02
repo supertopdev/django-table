@@ -80,18 +80,18 @@ WSGI_APPLICATION = 'centris_property.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'scraper',
+        # 'USER': 'root',
+        # 'PASSWORD': 'Icd023bfef986723vfwcfw',
+        # 'HOST': '10.5.0.10',   # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'scraper',
         'USER': 'root',
-        'PASSWORD': 'Icd023bfef986723vfwcfw',
-        'HOST': '10.5.0.10',   # Or an IP Address that your DB is hosted on
+        'PASSWORD': 'root',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'centris',
-        # 'USER': 'root',
-        # 'PASSWORD': 'root',
-        # 'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        # 'PORT': '3306',
     }
 }
 

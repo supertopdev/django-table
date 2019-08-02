@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/select.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.modal.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css">
     <style>
         .search-field {
             float: left !important;
@@ -22,86 +27,340 @@
         #search_fiels .col-md-4 {
             margin-top: 15px;
         }
-    </style>
+        .form-group input[type="radio"] {
+            display: none;
+        }
 
+        .form-group input[type="radio"] + .btn-group > label span {
+            width: 20px;
+        }
+
+        .form-group input[type="radio"] + .btn-group > label span:first-child {
+            display: none;
+        }
+        .form-group input[type="radio"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="radio"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+        .form-group input[type="radio"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+        .slidecontainer {
+          width: 100%;
+        }
+
+        .form-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+            display: none;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+        .slidecontainer {
+          width: 100%;
+        }
+
+        .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 25px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        .slider:hover {
+          opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="header">
+    <div class="header col-md-15 offset-md-5 mt-3">
         <h1>Centris Properties</h1>
     </div>
-    <div id="ex1" class="modal">
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="pid">Search Number</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="centris_title">Search Title</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="price">Search Price</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="workscore">Search Workscore</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="beds_baths">Search Rooms</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="address">Search Address</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="agent_name">Search Agent Name</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="built_year">Search Built Year</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="const_year">Search Construction Year</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="available_area">Search Available Area</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="lot_area">Search Lot Area</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="fireplace_stove">Search Fireplace/Stove</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="add_features">Search Additional Features</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="gross_revenue">Search Gross Revenue</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="unit_number">Search Unit Number</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="parking">Search Parking</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="main_unit">Search Main Unit</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="resid_unit">Search Residential Unit</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="building_area">Search Building Area</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="use_property">Search Use of Property</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="zoning">Search Zoning</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="resid_units">Search Residential Units</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="business_type">Search Business Type</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="intergen">Search Intergenerational</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="building_style">SearchBuilding Style</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="pool">Search Pool</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="active">Search Active</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="condominium">Search Condominium</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="gross_area">Search Gross Area</a>
-        </p>
-        <p>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="net_area">Search Net Area</a>
-            <a href="#" rel="modal:close" class="btn btn-success add-filter" id="operation_type">Search Operation Type</a>
-        </p>
-    </div>
-    <div id="demo" class="display">
-        <a href="#ex1" rel="modal:open" class="btn btn-success">Add Search</a>
 
-        <form name="search" action="search" method="POST">
+    <div id="demo" class="display mt-3 mb-3">
+        <form class="search-results" action="search" method="post" name="search">
             {% csrf_token %}
-            <div class="container">
-                <div id="search_fiels" class="row">
+            <div class="search-form" id="search-form">
+{#                <div class="search-section">#}
+{#                    <div class="container">#}
+{#                        <form action="#" method="post" novalidate="novalidate">#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-12">#}
+{#                                    <div class="row">#}
+{#                                        <div class="col-lg-9 col-md-5 col-sm-12 p-6">#}
+{#                                            <input type="text" class="form-control search-slt" placeholder="Enter Pickup City">#}
+{#                                        </div>#}
+{#                                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">#}
+{#                                            <button type="button" id="search" class="btn btn-success wrn-btn">Search</button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+    {#            <div class="filters-list" id="freeform-filters">#}
+    {#                <form>#}
+    {#                    <div>#}
+    {#                          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">#}
+    {##}
+    {#                    </div>#}
+    {#                    <br />#}
+    {#                    <div id="slider"></div>#}
+    {#                </form>#}
+    {#            </div>#}
+                <div class="business-method">
+                    <div id="container-basic-criterias" class="col-md-15 offset-md-2 mt-3">
+                        <div class="form-group col-md-6" id="commercial">
+                            <input type="radio" name="centris_title_business" class="centris_title" value="Commercial" id="fancy-checkbox-success" autocomplete="off" checked="checked"/>
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-success" class="[ btn btn-success ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-success" class="[ btn btn-default active ]">
+                                    Commercial
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6" id="residential">
+                            <input type="radio" name="centris_title_business" id="fancy-checkbox-info" value="Residential" autocomplete="off" />
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-info" class="[ btn btn-success ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-info" class="[ btn btn-default active ]">
+                                    Residential
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="real_estate_pro">
+                    <div class="col-md-15 offset-md-2 mt-3" id="container-basic">
+                        <div class="form-group col-md-6 " id="sale">
+                            <input type="radio" name="centris_title_for" id="fancy-checkbox-warning" value="sale" autocomplete="off" checked="checked"/>
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-warning" class="[ btn btn-success ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-warning" class="[ btn btn-default active ]">
+                                    Sale
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6" id="rent">
+                            <input type="radio" name="centris_title_for" id="fancy-checkbox-primary" value="rent" autocomplete="off" />
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-primary" class="[ btn btn-success ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                                    Rent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="link-more-below col-md-2 offset-md-5 mt-3" id="btn-advanced-criterias">Advanced Search</a>
+            </div>
+            <div class="advanced-search" id="advanced-search">
+                <div class="fieldset-border">
+                    <div class="Property type col-md-12 offset-md-1 mt-3" id="property-search-field" style="display: none">Property Type</div>
+                    <div class="PropertyTypeSection" id="container-fieldset">
+                        <div class="control-group">
+                            <div class="controls dynamic-control">
+                                <div class="controls-residential-sale col-md-12 offset-md-0 mt-3" id="controls-residential-sale" style="display: none">
+                                    <div class="custom-control custom-checkbox custom-control-inline offset-md-2 mt-3">
+                                      <input type="checkbox" name="centris_title" value="House" class="custom-control-input" id="single-family-home">
+                                      <label class="custom-control-label" for="single-family-home">Single Family Home</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" name="centris_title" value="Condo" class="custom-control-input" id="Condo">
+                                      <label class="custom-control-label" for="Condo">Condo</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" name="centris_title" value="Loft / Studio" class="custom-control-input" id="loft-studio">
+                                      <label class="custom-control-label" for="loft-studio">Loft/Studio</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" name="centris_title" value="Townhouse" id="condominium-home">
+                                      <label class="custom-control-label" for="condominium-home">Condominium Home</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" name="centris_title" value="Plex" id="plex">
+                                      <label class="custom-control-label" for="plex">Plex</label>
+                                    </div>
+
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" name="intergenerational" id="intergenerational">
+                                      <label class="custom-control-label" for="intergenerational">Intergenerational</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" name="centris_title" value="Mobile" id="mobile-home">
+                                      <label class="custom-control-label" for="mobile-home">Mobile Home</label>
+                                    </div>
+
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="hobby-farm" name="centris_title" value="Hobby farm">
+                                      <label class="custom-control-label" for="hobby-farm">Hobby Farm</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" name="centris_title" value="Lot" id="lot">
+                                      <label class="custom-control-label" for="lot">Lot</label>
+                                    </div>
+                                </div>
+                                <div class="controls-commercial-sale col-md-12 offset-md-0 mt-3" id="controls-commercial-sale" style="display: none">
+                                    <div class="custom-control custom-checkbox custom-control-inline offset-md-2 mt-3">
+                                      <input type="checkbox" name="centris_title" value="" class="custom-control-input" id="multi-family">
+                                      <label class="custom-control-label" for="multi-family">Multi-Family</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="office">
+                                      <label class="custom-control-label" for="office">Office</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="industrial">
+                                      <label class="custom-control-label" for="industrial">Industrial</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="commercial">
+                                      <label class="custom-control-label" for="commercial">Commercial</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="accommodation">
+                                      <label class="custom-control-label" for="accommodation">Accommodation</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="agricultural">
+                                      <label class="custom-control-label" for="agricultural">Agricultural</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="lot">
+                                      <label class="custom-control-label" for="lot">lot</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="business">
+                                      <label class="custom-control-label" for="business">Business</label>
+                                    </div>
+                                </div>
+                                <div class="controls-commercial-rent col-md-12 offset-md-0 mt-3" id="controls-commercial-rent" style="display: none">
+                                    <div class="custom-control custom-checkbox custom-control-inline offset-md-2 mt-3">
+                                      <input type="checkbox" class="custom-control-input" id="office">
+                                      <label class="custom-control-label" for="office">Office</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="industrial">
+                                      <label class="custom-control-label" for="industrial">Industrial</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="commercial">
+                                      <label class="custom-control-label" for="commercial">Commercial</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="agricultural">
+                                      <label class="custom-control-label" for="agricultural">Agricultural</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="lot">
+                                      <label class="custom-control-label" for="lot">Lot</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="business">
+                                      <label class="custom-control-label" for="business">Business</label>
+                                    </div>
+                                </div>
+                                <div class="controls-residential-rent col-md-12 offset-md-0 mt-3" id = "controls-residential-rent" style="display: none">
+                                    <div class="custom-control custom-checkbox custom-control-inline  offset-md-2 mt-3">
+                                      <input type="checkbox" class="custom-control-input" id="single-family-home">
+                                      <label class="custom-control-label" for="single-family-home">Single-Family Home</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="condo-apartment">
+                                      <label class="custom-control-label" for="condo-apartment">Condo/Apartment</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="loft-studio">
+                                      <label class="custom-control-label" for="loft-studio">Loft/Studio</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="condominium-home">
+                                      <label class="custom-control-label" for="condominium-home">Condominium Home</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="intergenerational">
+                                      <label class="custom-control-label" for="intergenerational">Intergenerational</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="mobile-home">
+                                      <label class="custom-control-label" for="mobile-home">Mobile Home</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="hobby-farm">
+                                      <label class="custom-control-label" for="hobby-farm">Hobby Farm</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                      <input type="checkbox" class="custom-control-input" id="lot">
+                                      <label class="custom-control-label" for="lot">Lot</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <input type="submit" class="btn btn-success col-md-1 offset-md-5" placeholder="search" id="submit" style="display: none; margin-top: 30px;">
+            <input type="submit" name="search" class="btn btn-success col-md-3 mt-3 offset-md-4 mb-3">
         </form>
 
 
@@ -208,38 +467,60 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
     <script src="{% static 'js/jquery.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
     <script src="{% static 'js/jquery.modal.min.js' %}"></script>
-
-    <script>
-
-        $(document).ready(function(){
-          $(".add-filter").click(function(e){
-            var label = $(this).attr("id");
-            if (label == 'price')
-                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="from"></div><div class="col-md-4"><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="to"></div>`);
-            else if (label == 'centris_title')
-                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);
-            else
-                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="search.."></div>`);
-
-            $("#submit").show();
-          });
-        });
-        function columnFilterKeyUp(label) {
-            if (label == 'centris_title')
-            var value = $('#col'+label+'_filter').val();
-            console.log(label, value)
-            filterColumn(label, value);
-        }
-
-    </script>
-
+{#    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>#}
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js"></script>#}
+    <script src="{% static 'js/bootstrap-slider.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+{#    <script>#}
+{##}
+{#        $(document).ready(function(){#}
+{#          $(".add-filter").click(function(e){#}
+{#            var label = $(this).attr("id");#}
+{#            if (label === 'price')#}
+{#                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="from"></div><div class="col-md-4"><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="to"></div>`);#}
+{#            else if (label === 'centris_title')#}
+{#                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);#}
+{#            else#}
+{#                $("#search_fiels").append(`<div class="col-md-4"><span class="search-field"> ${label} &#58;</span><input type="text" class="filter_${label} filter-input" name="${label}" id="col${label}_filter" placeholder="search.."></div>`);#}
+{##}
+{#            $("#submit").show();#}
+{#          });#}
+{#        });#}
+{#        function columnFilterKeyUp(label) {#}
+{##}
+{#            var value = $('#col'+label+'_filter').val();#}
+{#            console.log(label, value)#}
+{#            filterColumn(label, value);#}
+{#        }#}
+{#        $(document).ready(function(){#}
+{#          if($(".filter_centris_title").prop("checked")===true){#}
+{#            var label = $(this).attr("value");#}
+{#            console.log('label');#}
+{#            if (label === 'Commercial')#}
+{#                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);#}
+{#            else if (label === 'Residential')#}
+{#                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);#}
+{#            else if (label === 'sale')#}
+{#                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);#}
+{#            else if (label === 'rent')#}
+{#                $("#search_fiels").append(`<div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Commercial">Commercial</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="Residential">Residential</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="sale">sale</div><div class="col-md-6"><input type="checkbox" class="filter_${label}" name="${label}" id="col${label}_filter" value="rent">rent</div></div>`);#}
+{##}
+{#            $("#submit").show();#}
+{#          }#}
+{#        });#}
+{##}
+{#    </script>#}
+{##}
     <script>
         $(document).ready(function(){
             $(".delete").click(function() {
@@ -259,6 +540,38 @@
             });
         });
     </script>
+
+
+
+    <script>
+        $(document).ready(function(){
+            $("#search").click(function() {
+                var key = $(input[type="checkbox"])
+                var id = $(this).attr('id');
+                $.ajax({
+                    url: "{% url 'delete' %}",
+                    data: { 'id' : id },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function(response){
+                        if (response['success'] == 'success') {
+                            location.reload(true);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{#    <script>#}
+{##}
+{#        // Instantiate a slider#}
+{##}
+{##}
+{#    </script>#}
+{#    <script>#}
+{##}
+{#    </script>#}
 
 </body>
 </html>

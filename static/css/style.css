@@ -22,3 +22,35 @@ th, td {
 .filter-input {
     float: right !important;
 }
+
+
+.fields-container label {
+    font-size: 1.1875em;
+    font-family: 'Lato',Arial,Helvetica,sans-serif;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+label {
+        cursor: default;
+}
+
+.ui-helper-hidden-accessible {
+    order: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#search-block #search-form .search-field .fields-container input {
+    background: transparent;
+    width: 250% !important;
+    height: 100px;
+    border: 0;
+    -webkit-appearance: none;
+}
